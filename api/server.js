@@ -14,11 +14,14 @@ const auth={
     username: config.API_KEY,
     password: config.API_SECRET,
 }
-const BASE_URL=`https://api.cloudinary.com/v1_1/${config.CLOUD_NAME}/resources/image`
+const BASE_URL=`https://api.cloudinary.com/v1_1/${config.CLOUD_NAME}`
 
 app.get('/photos', async(req,res)=>{
-    const response= await axios.get(BASE_URL,{
+    const response= await axios.get(BASE_URL+'/resources/image',{
         auth,
+        params :{
+            next_cursor: req.query.next_cursor,
+        }
     });
     return res.send(response.data);
 });

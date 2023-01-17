@@ -1,11 +1,11 @@
 const API_URL=process.env.REACT_APP_API_URL;
-console.log(API_URL);
+export const getImages = async(nextCursor)=>{
+    const params= new URLSearchParams();
+    if(nextCursor){
+        params.append('next_cursor',nextCursor);
+    }
 
-export const getImages = async()=>{
-    const response = await fetch(`${API_URL}/photos`)
-    console.log("here");
-    console.log(response);
+    const response = await fetch(`${API_URL}/photos?${params}`);
     const responseJson= await response.json();
-    console.log(responseJson);
     return responseJson;
 };
