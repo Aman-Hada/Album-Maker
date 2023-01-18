@@ -26,5 +26,15 @@ app.get('/photos', async(req,res)=>{
     return res.send(response.data);
 });
 
+app.get('/search', async(req,res)=>{
+    const response= await axios.get(BASE_URL+'/resources/search',{
+        auth,
+        params :{
+            expression: req.query.expression,
+        }
+    });
+    return res.send(response.data);
+});
+
 const PORT=6001;
 app.listen(PORT, console.log(`server is listening on port number ${PORT}`));
