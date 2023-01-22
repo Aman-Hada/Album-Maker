@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { getImages,getSearch } from './api';
 import './App.css'
+import { UploadWidget } from './UploadWidget';
 const App = () => {
   const [imageList, setImageList] = useState([]);
   const [nextCursor, setNextCursor] = useState(null);
@@ -27,17 +28,18 @@ const App = () => {
     setTempValue(1);
     setImageList(responseJson.resources);
     setNextCursor(responseJson.next_cursor);
-    
-    
   }
+
   const imageRestoreHandler=async()=>{
     setSearchValue('');
     const responseJson= await getImages();
     setTempValue(0);
     setImageList(responseJson.resources);
     setNextCursor(responseJson.next_cursor);
-    
   }
+  
+
+
   return (<>
     <form className='form' onSubmit={loadSearchHandler}>
       <input value={searchValue} onChange={(event)=> setSearchValue(event.target.value)} required='required' placeholder='enter a search value...' ></input>
@@ -53,7 +55,9 @@ const App = () => {
     </div>
     <div className='hmmm'>
       { imageList.length===0 ? <p>Sorry, no image found of that name</p>: ''}
-
+    </div>
+    <div className='upl'>
+      <UploadWidget/>
     </div>
     </>
   );
