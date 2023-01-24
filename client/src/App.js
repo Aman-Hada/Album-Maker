@@ -15,13 +15,15 @@ const App = () => {
       setNextCursor(responseJson.next_cursor);
     }
     fetchdata();
-  }, []);
+  }, [imageList]);
 
   const loadImagesHandler=async ()=>{
     const responseJson=await getImages(nextCursor);
       setImageList((currentimagelist)=>[...currentimagelist,...responseJson.resources,]);
       setNextCursor(responseJson.next_cursor);
+
   }
+
   const loadSearchHandler=async(event)=>{
     event.preventDefault();
     const responseJson=await getSearch(searchValue,nextCursor);
@@ -37,9 +39,6 @@ const App = () => {
     setImageList(responseJson.resources);
     setNextCursor(responseJson.next_cursor);
   }
-  
-
-
   return (<>
     <form className='form' onSubmit={loadSearchHandler}>
       <input value={searchValue} onChange={(event)=> setSearchValue(event.target.value)} required='required' placeholder='enter a search value...' ></input>
@@ -48,8 +47,8 @@ const App = () => {
       {temp===1?<button type='button' onClick={imageRestoreHandler}>All Images</button>:''}
     </form>
     <div className='image-grid'>{
-      imageList.map((image)=>(<img src={image.url} alt={image.public_id} key={image.public_id}></img>))
-    }</div>
+        imageList.map((image)=>(<img src={image.url} alt={image.public_id} key={image.public_id}></img>))
+      }</div>
     <div className='footer'>
       {nextCursor && <button onClick={loadImagesHandler} >Load More Images</button>}
     </div>
@@ -57,7 +56,7 @@ const App = () => {
       { imageList.length===0 ? <p>Sorry, no image found of that name</p>: ''}
     </div>
     <div className='upl'>
-      <UploadWidget/>
+      <UploadWidget imageList={imageList} setImageList={setImageList}/>
     </div>
     </>
   );
