@@ -3,7 +3,7 @@ export const UploadWidget = ({imageList, setImageList}) => {
     const cloudinaryRef= useRef();
     const widgetRef= useRef();
 
-    useEffect(()=>{
+    useEffect((imageList, setImageList)=>{
         cloudinaryRef.current=window.cloudinary;
         widgetRef.current=cloudinaryRef.current.createUploadWidget({
             cloudName: 'dgmnw0fle',

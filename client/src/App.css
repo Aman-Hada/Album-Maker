@@ -22,3 +22,8 @@ img{
 .upl{
   text-align: center;
 }
+
+.object:hover{
+  cursor: pointer;
+  /*transform: scale(1.03);*/
+}

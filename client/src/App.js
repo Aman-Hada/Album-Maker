@@ -2,6 +2,11 @@ import React, {useState, useEffect} from 'react'
 import { getImages,getSearch } from './api';
 import './App.css'
 import { UploadWidget } from './UploadWidget';
+import { Modals } from './Modals';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+
 const App = () => {
   const [imageList, setImageList] = useState([]);
   const [nextCursor, setNextCursor] = useState(null);
@@ -15,12 +20,13 @@ const App = () => {
       setNextCursor(responseJson.next_cursor);
     }
     fetchdata();
-  }, [imageList]);
+  }, []);
 
   const loadImagesHandler=async ()=>{
     const responseJson=await getImages(nextCursor);
       setImageList((currentimagelist)=>[...currentimagelist,...responseJson.resources,]);
       setNextCursor(responseJson.next_cursor);
+      
 
   }
 
@@ -39,6 +45,7 @@ const App = () => {
     setImageList(responseJson.resources);
     setNextCursor(responseJson.next_cursor);
   }
+
   return (<>
     <form className='form' onSubmit={loadSearchHandler}>
       <input value={searchValue} onChange={(event)=> setSearchValue(event.target.value)} required='required' placeholder='enter a search value...' ></input>
@@ -47,7 +54,7 @@ const App = () => {
       {temp===1?<button type='button' onClick={imageRestoreHandler}>All Images</button>:''}
     </form>
     <div className='image-grid'>{
-        imageList.map((image)=>(<img src={image.url} alt={image.public_id} key={image.public_id}></img>))
+      imageList.map((image)=>(<Modals img_id={image.public_id} img_src={image.url}/>))
       }</div>
     <div className='footer'>
       {nextCursor && <button onClick={loadImagesHandler} >Load More Images</button>}
