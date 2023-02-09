@@ -48,13 +48,13 @@ const App = () => {
 
   return (<>
     <form className='form' onSubmit={loadSearchHandler}>
-      <input value={searchValue} onChange={(event)=> setSearchValue(event.target.value)} required='required' placeholder='enter a search value...' ></input>
+      <input value={searchValue} onChange={(event)=> setSearchValue(event.target.value)} required='required' placeholder='Enter a search value...' id='search' ></input>
       <button type='submit'>search</button>
       <button type='reset'>clear</button>
       {temp===1?<button type='button' onClick={imageRestoreHandler}>All Images</button>:''}
     </form>
     <div className='image-grid'>{
-      imageList.map((image)=>(<Modals img_id={image.public_id} img_src={image.url}/>))
+      imageList.map((image)=>(<Modals className='grid-item' img_id={image.public_id} img_src={image.url}/>))
       }</div>
     <div className='footer'>
       {nextCursor && <button onClick={loadImagesHandler} >Load More Images</button>}
