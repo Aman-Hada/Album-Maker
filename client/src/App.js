@@ -20,14 +20,12 @@ const App = () => {
       setNextCursor(responseJson.next_cursor);
     }
     fetchdata();
-  }, []);
+  }, [imageList]);
 
   const loadImagesHandler=async ()=>{
     const responseJson=await getImages(nextCursor);
       setImageList((currentimagelist)=>[...currentimagelist,...responseJson.resources,]);
       setNextCursor(responseJson.next_cursor);
-      
-
   }
 
   const loadSearchHandler=async(event)=>{
