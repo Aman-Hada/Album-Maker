@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { getImages,getSearch } from './api';
 import './App.css'
 import { UploadWidget } from './UploadWidget';
-import { Signup } from './signup';
+//import { Signup } from './signup';
 import { Modals } from './Modals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
