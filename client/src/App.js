@@ -53,6 +53,17 @@ const App = () => {
       <button type='reset'>clear</button>
       {temp===1?<button type='button' onClick={imageRestoreHandler}>All Images</button>:''}
     </form>
+    
+    <div class="sidebar">
+    <div class="buttons" >
+      <button class="butt">Recent</button>
+      <button class="butt">Yesterday</button>
+      <button class="butt">Last Week</button>
+      <button class="butt">Last month</button>
+      <button class="butt">Last Year</button>
+    </div>
+  </div>
+
     <div className='image-grid'>{
       imageList.map((image)=>(<Modals img_id={image.public_id} img_src={image.url}/>))
       }</div>
