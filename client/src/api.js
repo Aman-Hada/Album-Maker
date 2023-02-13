@@ -20,3 +20,9 @@ export const getSearch = async(searchValue,nextCursor)=>{
     const responseJson= await response.json();
     return responseJson;
 }
+
+export const deleteImage = async(public_id, r_type)=>{
+    const response = await fetch(`${API_URL}/delete/${r_type}/${public_id}`, {method: "DELETE"});
+    const responseJson= await response.json();
+    return responseJson;
+} 

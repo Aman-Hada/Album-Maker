@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { getImages,getSearch } from './api';
 import './App.css'
 import { UploadWidget } from './UploadWidget';
+import { Signup } from './signup';
 import { Modals } from './Modals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -20,14 +21,12 @@ const App = () => {
       setNextCursor(responseJson.next_cursor);
     }
     fetchdata();
-  }, []);
+  }, [imageList]);
 
   const loadImagesHandler=async ()=>{
     const responseJson=await getImages(nextCursor);
       setImageList((currentimagelist)=>[...currentimagelist,...responseJson.resources,]);
       setNextCursor(responseJson.next_cursor);
-      
-
   }
 
   const loadSearchHandler=async(event)=>{
@@ -47,12 +46,38 @@ const App = () => {
   }
 
   return (<>
+   
+    <div class="menu-bar">
+      <ul>
+        <li class="active"><a href="#"><i class="fa fa-home"></i></a>Home</li>
+        <li><a href="https://ie.nitk.ac.in/"><i class="fa fa-users"></i></a>About Us</li>
+        <li><a href="#"><i class="fa fa-clone"></i></a>Services</li>
+        <li><a href="#"><i class="fa fa-angellist"></i></a>Team</li>
+        <li><a href="#"><i class="fa fa-phone"></i></a>Contact Us</li>
+        <li><a href="C:\Users\91851\Downloads\Album-Maker-main\Album-Maker-main\client\src\login\Login.html"><i class="fa fa-edit"></i></a>Login</li>
+      </ul>
+      
+    </div>
+   
     <form className='form' onSubmit={loadSearchHandler}>
       <input value={searchValue} onChange={(event)=> setSearchValue(event.target.value)} required='required' placeholder='Enter a search value...' id='search' ></input>
       <button type='submit'>search</button>
       <button type='reset'>clear</button>
       {temp===1?<button type='button' onClick={imageRestoreHandler}>All Images</button>:''}
     </form>
+    
+
+    <div class="sidebar">
+    <div class="buttons" >
+      <button class="butt">Recent</button>
+      <button class="butt">Yesterday</button>
+      <button class="butt">Last Week</button>
+      <button class="butt">Last month</button>
+      <button class="butt">Last Year</button>
+    </div>
+  </div>
+
+
     <div className='image-grid'>{
       imageList.map((image)=>(<Modals className='grid-item' img_id={image.public_id} img_src={image.url}/>))
       }</div>

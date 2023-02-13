@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { deleteImage } from './api';
 
 const MyVerticallyCenteredModal= (props)=> {
 
@@ -18,13 +19,15 @@ const MyVerticallyCenteredModal= (props)=> {
         </p>
       </Modal.Body>
       <Modal.Footer>
-      <Button onClick={props.onHide} variant="danger">Delete</Button>
+      <Button onClick={()=>{
+        deleteImage(props.img_id, "image")
+      }} variant="danger">Delete</Button>
         <Button onClick={props.onHide}>Close</Button>
       </Modal.Footer>
     </Modal>
   );
 }
-
+ 
 export const Modals =({img_src, img_id})=> {
   const [modalShow, setModalShow] = React.useState(false);
 
