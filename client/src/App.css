@@ -1,3 +1,32 @@
+.menu-bar{
+  background:rgb(0,100,0);
+  text-align:center;
+}
+.menu-bar ul{
+  display:inline-flex;
+  list-style:none;
+  color:#fff;
+}
+.menu-bar ul li{
+  width:120px;
+  margin:5px;
+  padding:2px;
+
+}
+.menu-bar ul li a{
+  text-decoration:none;
+  color:#fff;
+
+}
+.active,.menu-bar ul li:hover{
+  background:#2bab0d;
+  border-radius:3px;
+}
+
+.menu-bar .fa{
+  margin-right:8px;
+}
+
 img{
   width: 100%;
   height: 100%;
@@ -23,6 +52,8 @@ img{
 }
 .form{
   text-align: center;
+  margin:5px;
+  padding:2px;
 }
 .hmmm{
   text-align: center;
@@ -33,6 +64,7 @@ img{
   cursor: pointer;
   /*transform: scale(1.03);*/
 }
+
 
 .sidebar{
   position: fixed;
@@ -80,3 +112,4 @@ img{
   color: black; 
   background-color: rgb(172, 231, 167);
 }
+
